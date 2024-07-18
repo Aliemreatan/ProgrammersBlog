@@ -38,6 +38,11 @@ namespace ProgrammersBlog.Entities.Dtos
         [Required(ErrorMessage = "Lütfen, bir {0} seçiniz.")]
         [DataType(DataType.Upload)]
         public IFormFile PictureFile { get; set; }
+        // Su andan itibaren yaptığın değişiklikleri vs bulup kontrol edecek
+        /*
+         Eğer değişiklik yaparsan bunları commit ederek repoyu güncelleyebilirsin 
+        örneğin yorum satırı ekledin bunu da anlar
+         */
         public string? Picture { get; set; }
     }
 }
