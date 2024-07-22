@@ -24,15 +24,12 @@ namespace ProgrammersBlog.Entities.Dtos
         [MinLength(10, ErrorMessage = "{0} {1} karakterden küçük olmamalıdır.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        
         [DisplayName("Telefon Numarası")]
         [Required(ErrorMessage = "{0} boş geçilmemelidir.")]
         [MaxLength(13, ErrorMessage = "{0} {1} karakterden büyük olmamalıdır.")] // +905555555555 // 13 characters
         [MinLength(13, ErrorMessage = "{0} {1} karakterden küçük olmamalıdır.")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
-        
-        
         [DisplayName("Resim Ekle")]
         [DataType(DataType.Upload)]
         public IFormFile PictureFile { get; set; }

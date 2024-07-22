@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><span class="fas fa-edit"></span> Kullanıcı Ekle</h5>
+                <h5 class="modal-title"><span class="fas fa-edit"></span> Kullanıcı Düzenle</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="İptal">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,7 +12,7 @@
                 <form asp-action="Update" id="form-user-update">
                     <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
                     <div asp-validation-summary="All" class="text-danger" id="validation-summary" aria-hidden="true" style="display: none;"></div>
-                    <input asp-for="Id" type="hidden"/>
+                    <input asp-for="Id" type="hidden" />
                     <div class="form-group">
                         <label asp-for="UserName"></label>
                         <input class="form-control" asp-for="UserName" placeholder="Lütfen, kullanıcı adı giriniz." />
@@ -29,13 +29,13 @@
                         <span class="text-danger" asp-validation-for="PhoneNumber"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="PhoneNumber"></label>
-                        <img  class="img-fluid img-thumbnail" src="~/image/@Model.Picture" alt="@Model.UserName"/>
-                        
+                        <label asp-for="Picture"></label>
+                        <input asp-for="Picture" type="hidden" />
+                        <img class="my-image" src="~/img/@Model.Picture" alt="@Model.UserName" />
                     </div>
                     <div class="form-group">
                         <label asp-for="PictureFile"></label>
-                        <input type="file" accept="image/*" class="form-control-file" asp-for="PictureFile"/>
+                        <input type="file" accept="image/*" class="form-control-file" asp-for="PictureFile" placeholder="Lütfen, telefon numarası giriniz." />
                         <span class="text-danger" asp-validation-for="PictureFile"></span>
                     </div>
                 </form>
