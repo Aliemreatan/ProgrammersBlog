@@ -46,7 +46,7 @@ namespace ProgrammersBlog.Mvc
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
             });
         }
-
+        
         public static void Main(string[] args)
         {
 
