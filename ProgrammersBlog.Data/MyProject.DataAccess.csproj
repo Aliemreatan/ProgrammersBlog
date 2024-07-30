@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProgrammersBlog.Entities\ProgrammersBlog.Entities.csproj" />
+    <ProjectReference Include="..\ProgrammersBlog.Entities\MyProject.Entities.csproj" />
   </ItemGroup>
 
 </Project>
