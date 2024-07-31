@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProgrammersBlog.Shared\ProgrammersBlog.Shared.csproj" />
+    <ProjectReference Include="..\ProgrammersBlog.Shared\MyProject.Shared.csproj" />
   </ItemGroup>
 
 </Project>
