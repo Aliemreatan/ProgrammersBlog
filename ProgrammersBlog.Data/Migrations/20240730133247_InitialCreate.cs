@@ -29,33 +29,6 @@ namespace ProgrammersBlog.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Picture = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -77,6 +50,27 @@ namespace ProgrammersBlog.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Groups",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedByName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ModifiedByName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Groups", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -93,6 +87,81 @@ namespace ProgrammersBlog.Data.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Picture = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    GroupId = table.Column<int>(type: "int", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Articles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Content = table.Column<string>(type: "NVARCHAR(max)", nullable: false),
+                    Thumbnail = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ViewsCount = table.Column<int>(type: "int", nullable: false),
+                    CommentCount = table.Column<int>(type: "int", nullable: false),
+                    SeoAuthor = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    SeoDescription = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    SeoTags = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedByName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ModifiedByName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Articles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Articles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Articles_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -183,48 +252,6 @@ namespace ProgrammersBlog.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Articles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Content = table.Column<string>(type: "NVARCHAR(max)", nullable: false),
-                    Thumbnail = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ViewsCount = table.Column<int>(type: "int", nullable: false),
-                    CommentCount = table.Column<int>(type: "int", nullable: false),
-                    SeoAuthor = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SeoDescription = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    SeoTags = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedByName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ModifiedByName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Articles", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Articles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Articles_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
@@ -256,17 +283,17 @@ namespace ProgrammersBlog.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 98, "7acca273-4d73-466e-995a-3bb3c5d73733", "Editor", "EDITOR" },
-                    { 99, "f6927436-e711-44cd-97f1-a34f201ba626", "Admin", "ADMIN" }
+                    { 98, "1b76bcd5-9851-4cb0-b177-14b69951c103", "Editor", "EDITOR" },
+                    { 99, "9b0b8cb2-d004-47e0-8e62-e5f96801302b", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Picture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "GroupId", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Picture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 98, 0, "ad4c51d8-70ca-444f-8b4f-742a3f70c0d2", "editoruser@gmail.com", true, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAIAAYagAAAAENoxhVqy9RpN9p/BKWHa1xTsEa0kHUpkww2lQN23cIO/wyDf/mx5wezeZPMvGx2r0A==", "+905336323010", true, "defaultUser.png", "97eb8d84-20c3-4af0-b566-a636fa44e35b", false, "editorUser" },
-                    { 99, 0, "3b5fac41-26d9-45ac-9c17-41d1fa6e4387", "adminuser@gmail.com", true, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAIAAYagAAAAEMWfMdu66Hx4DSxZWeM0vzTZ4GBQZJ++3ef+mtAmSPud6zyREJWAJyHdHlNeKl2m9g==", "+905336323010", true, "defaultUser.png", "0ca7e351-94a5-4a26-91b4-c62721639fdb", false, "adminUser" }
+                    { 98, 0, "45341cbe-7186-431e-98ff-e82902aecc59", "editoruser@gmail.com", true, null, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAIAAYagAAAAEG8den2o+x1vF7UokYwZcbSE3jMh4QAkhmh8Qa4IOQnL+jrb2WR5whj8tHMvulFV2w==", "+905336323010", true, "defaultUser.png", "32d5913d-0adc-4ec0-a419-fd8c17edea0f", false, "editoruser" },
+                    { 99, 0, "292276bb-e18c-495f-9fbb-3866c8d475bd", "adminuser@gmail.com", true, null, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAIAAYagAAAAEChMsiJfeO5VbpGNTUnlHOqsJfPjOHDly1yIfJ0gQubtpuRN7prNQopmUD9UpjWY7w==", "+905336323010", true, "defaultUser.png", "961e39be-0143-4ec8-90d3-4e59c9f90229", false, "adminuser" }
                 });
 
             migrationBuilder.InsertData(
@@ -274,9 +301,19 @@ namespace ProgrammersBlog.Data.Migrations
                 columns: new[] { "Id", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Name", "Note" },
                 values: new object[,]
                 {
-                    { 1, "InitialCreate", new DateTime(2024, 7, 19, 16, 3, 36, 57, DateTimeKind.Local).AddTicks(5549), "C# Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 7, 19, 16, 3, 36, 57, DateTimeKind.Local).AddTicks(5550), "C#", "C# Blog Kategorisi" },
-                    { 2, "InitialCreate", new DateTime(2024, 7, 19, 16, 3, 36, 57, DateTimeKind.Local).AddTicks(5553), "C++ Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 7, 19, 16, 3, 36, 57, DateTimeKind.Local).AddTicks(5554), "C++", "C++ Blog Kategorisi" },
-                    { 3, "InitialCreate", new DateTime(2024, 7, 19, 16, 3, 36, 57, DateTimeKind.Local).AddTicks(5557), "JavaScript Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 7, 19, 16, 3, 36, 57, DateTimeKind.Local).AddTicks(5557), "JavaScript", "JavaScript Blog Kategorisi" }
+                    { 1, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8741), "C# Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8744), "C#", "C# Blog Kategorisi" },
+                    { 2, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8748), "C++ Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8748), "C++", "C++ Blog Kategorisi" },
+                    { 3, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8751), "JavaScript Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8752), "JavaScript", "JavaScript Blog Kategorisi" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Groups",
+                columns: new[] { "Id", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Name", "Note" },
+                values: new object[,]
+                {
+                    { 1, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9810), "C# Programlama Dili Grubu", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9811), "C# Grubu", "C# Blog Grubu" },
+                    { 2, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9815), "C++ Programlama Dili Grubu ", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9816), "C++ Grubu", "C++ Blog Grubu" },
+                    { 3, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9818), "JavaScript Programlama Dili Grubu", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9819), "JavaScript Grubu", "JavaScript Blog Grubu" }
                 });
 
             migrationBuilder.InsertData(
@@ -331,6 +368,11 @@ namespace ProgrammersBlog.Data.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_GroupId",
+                table: "AspNetUsers",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -375,6 +417,9 @@ namespace ProgrammersBlog.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Groups");
         }
     }
 }

@@ -15,7 +15,9 @@ namespace ProgrammersBlog.Data.Concrete
         private readonly ProgrammersBlogContext _context;
         private EfArticleRepository _articleRepository;
         private EfCategoryRepository _categoryRepository;
+        private EfGroupRepository _groupRepository;
         private EfCommentRepository _commentRepository;
+
         
 
         public UnitOfWork(ProgrammersBlogContext context)
@@ -25,7 +27,12 @@ namespace ProgrammersBlog.Data.Concrete
 
         public IArticleRepository Articles => _articleRepository ?? new EfArticleRepository(_context);
         public ICategoryRepository Categories => _categoryRepository ?? new EfCategoryRepository(_context);
+
         public ICommentRepository Comments => _commentRepository ?? new EfCommentRepository(_context);
+
+        public IGroupRepository Groups => _groupRepository ?? new EfGroupRepository (_context);
+
+
         public async Task<int> SaveAsync()
         {
             return await _context.SaveChangesAsync();

@@ -14,6 +14,7 @@ namespace ProgrammersBlog.Data.Concrete.EntityFramework.Contexts
     {
         public DbSet<Article> Articles { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Group> Groups { get; set; }
         public DbSet<Comment> Comments { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,6 +26,7 @@ namespace ProgrammersBlog.Data.Concrete.EntityFramework.Contexts
         {
             modelBuilder.ApplyConfiguration(new ArticleMap());
             modelBuilder.ApplyConfiguration(new CategoryMap());
+            modelBuilder.ApplyConfiguration(new GroupMap());
             modelBuilder.ApplyConfiguration(new CommentMap());
             modelBuilder.ApplyConfiguration(new RoleMap());
             modelBuilder.ApplyConfiguration(new UserMap());

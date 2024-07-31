@@ -10,6 +10,8 @@ namespace ProgrammersBlog.Data.Abstract
     {
         IArticleRepository Articles { get; } // unitofwork.Articles
         ICategoryRepository Categories { get; }
+
+        IGroupRepository Groups { get; }
         ICommentRepository Comments { get; }
         
         // _unitOfWork.Categories.AddAsync();

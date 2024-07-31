@@ -39,7 +39,7 @@ namespace ProgrammersBlog.Mvc
         public void ConfigureServices(IServiceCollection services)
         {
             // Kullancaðýmýz servisin sisteme tanýtýlmasý
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile), typeof(UserProfile));
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(GroupProfile), typeof(ArticleProfile), typeof(UserProfile), typeof(RoleProfile));
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -75,6 +75,7 @@ namespace ProgrammersBlog.Mvc
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ProgrammersBlogContext>();
             builder.Services.AddScoped<ICategoryService, CategoryManager>();
+            builder.Services.AddScoped<IGroupService, GroupManager>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             
             
@@ -85,6 +86,7 @@ namespace ProgrammersBlog.Mvc
                  mc.AddProfile(new CategoryProfile()); //AutoMapperProfiles 
                  mc.AddProfile(new ArticleProfile()); //AutoMapperProfiles 
                  mc.AddProfile(new UserProfile());
+                 mc.AddProfile(new RoleProfile());
             });
             IMapper mapper = mapperConfig.CreateMapper();
             builder.Services.AddSingleton(mapper);
