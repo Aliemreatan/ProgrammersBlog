@@ -1,0 +1,20 @@
+﻿@using MyProject.WebUi.Areas.Admin.Models
+@model RoleUpdateViewModel
+@{
+    ViewData["Title"] = "UpdateRole";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Rol Düzenleme Sayfası</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label>Role ID</label>
+        <input asp-for="@Model.Id" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label> Role Başlığı</label>
+        <input asp-for="@Model.Name" class="form-control" />
+    </div>
+    <button class="btn btn-success">Güncelle</button>
+</form>

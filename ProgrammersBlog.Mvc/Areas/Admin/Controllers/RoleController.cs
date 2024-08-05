@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using ProgrammersBlog.Mvc.Areas.Admin.Models;
 using Microsoft.AspNet.Identity;
+using MyProject.WebUi.Areas.Admin.Models;
 
 namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
 {
@@ -23,186 +24,136 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
     public class RoleController : Controller
     {
         private readonly Microsoft.AspNetCore.Identity.RoleManager<Role> _roleManager;
-        private readonly IWebHostEnvironment _env;
-        private readonly IMapper _mapper;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
 
-        public RoleController(Microsoft.AspNetCore.Identity.RoleManager<Role> roleManager, IWebHostEnvironment env, IMapper mapper)
+        public RoleController(Microsoft.AspNetCore.Identity.RoleManager<Role> roleManager, Microsoft.AspNetCore.Identity.UserManager<User> userManager)
         {
             _roleManager = roleManager;
-            _env = env;
-            _mapper = mapper;
-        }
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Index()
-        {
-            var roles = await _roleManager.Roles.ToListAsync();
-            return View(new RoleListDto
-            {
-                Roles = roles,
-                ResultStatus = ResultStatus.Success
-            });
+            _userManager = userManager;
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public async Task<JsonResult> GetAllRoles()
+        public IActionResult Index()
         {
-            var roles = await _roleManager.Roles.ToListAsync();
-            var roleListDto = JsonSerializer.Serialize(new RoleListDto
-            {
-                Roles = roles,
-                ResultStatus = ResultStatus.Success
-            }, new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.Preserve
-            });
-            return Json(roleListDto);
+            var values = _roleManager.Roles.ToList();
+            return View(values);
         }
-        [Authorize(Roles = "Admin")]
+
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult AddRole()
         {
-            return PartialView("_RoleAddPartial");
+            return View();
         }
-        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> Add(RoleAddDto roleAddDto)
+
+        public async Task<IActionResult> AddRole(RoleViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var role = _mapper.Map<Role>(roleAddDto);
-                var result = await _roleManager.CreateAsync(role);
+                Role role = new Role
+                {
+                    Name = model.Name
+                };
+                var result= await _roleManager.CreateAsync(role);
                 if (result.Succeeded)
                 {
-                    var roleAddAjaxModel = JsonSerializer.Serialize(new RoleAddAjaxViewModel
-                    {
-                        RoleDto = new RoleDto
-                        {
-                            ResultStatus = ResultStatus.Success,
-                            Message = $"{role.Name} adlı rol başarıyla eklenmiştir.",
-                            Role = role
-                        },
-                        RoleAddPartial = await this.RenderViewToStringAsync("_RoleAddPartial", roleAddDto)
-                    });
-                    return Json(roleAddAjaxModel);
+                    return RedirectToAction("Index");
+
                 }
-                else
+                foreach (var item in result.Errors)
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-
-                    var roleAddAjaxErrorModel = JsonSerializer.Serialize(new RoleAddAjaxViewModel
-                    {
-                        RoleAddDto = roleAddDto,
-                        RoleAddPartial = await this.RenderViewToStringAsync("_RoleAddPartial", roleAddDto)
-                    });
-                    return Json(roleAddAjaxErrorModel);
+                    ModelState.AddModelError("", item.Description);
                 }
-
             }
-            var roleAddAjaxModelStateErrorModel = JsonSerializer.Serialize(new RoleAddAjaxViewModel
-            {
-                RoleAddDto = roleAddDto,
-                RoleAddPartial = await this.RenderViewToStringAsync("_RoleAddPartial", roleAddDto)
-            });
-            return Json(roleAddAjaxModelStateErrorModel);
-
+            return View(model);
         }
-        [Authorize(Roles = "Admin")]
-        public async Task<JsonResult> Delete(int roleId)
+
+
+        [HttpGet]
+        public IActionResult UpdateRole(int id)
         {
-            var role = await _roleManager.FindByIdAsync(roleId.ToString());
-            var result = await _roleManager.DeleteAsync(role);
+            var values = _roleManager.Roles.FirstOrDefault(x => x.Id== id);
+            RoleUpdateViewModel model = new RoleUpdateViewModel
+            {
+                Id = values.Id,
+                Name = values.Name 
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateRole(RoleUpdateViewModel model)
+        {
+            var values = _roleManager.Roles.Where(x=>x.Id== model.Id).FirstOrDefault();
+
+            values.Name = model.Name;
+            var result = await _roleManager.UpdateAsync(values);
             if (result.Succeeded)
             {
-                var deletedRole = JsonSerializer.Serialize(new RoleDto
-                {
-                    ResultStatus = ResultStatus.Success,
-                    Message = $"{role.Name} adlı rol başarıyla silinmiştir.",
-                    Role = role
-                });
-                return Json(deletedRole);
+                return RedirectToAction("Index");
             }
-            else
-            {
-                string errorMessages = String.Empty;
-                foreach (var error in result.Errors)
-                {
-                    errorMessages = $"*{error.Description}\n";
-                }
-
-                var deletedRoleErrorModel = JsonSerializer.Serialize(new RoleDto
-                {
-                    ResultStatus = ResultStatus.Error,
-                    Message =
-                        $"{role.Name} adlı role silinirken bazı hatalar oluştu.\n{errorMessages}",
-                    Role = role
-                });
-                return Json(deletedRoleErrorModel);
-            }
+            return View(model);
         }
-        [Authorize(Roles = "Admin")]
+        
+
+        public async Task<IActionResult> DeleteRole(int id)
+        {
+            var values=_roleManager.Roles.FirstOrDefault(x => x.Id ==id);
+            var result = await _roleManager.DeleteAsync(values);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+    
+
+        public IActionResult UserRoleList()
+        {
+            var values = _userManager.Users.ToList();
+            return View(values);
+        }
         [HttpGet]
-        public async Task<PartialViewResult> Update(int roleId)
+        public async Task<IActionResult> AssignRole(int id)
         {
-            var role = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Id == roleId);
-            var roleUpdateDto = _mapper.Map<RoleUpdateDto>(role);
-            return PartialView("_RoleUpdatePartial", roleUpdateDto);
-        }
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public async Task<IActionResult> Update(RoleUpdateDto roleUpdateDto)
-        {
-            if (ModelState.IsValid)
+            var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
+            var roles = _roleManager.Roles.ToList();
+            TempData["UserId"] = user.Id;
+            
+            var userRoles = await _userManager.GetRolesAsync(user);
+            
+            List<RoleAssignViewModel> model = new List<RoleAssignViewModel>();
+            foreach(var item in roles)
             {
-                var oldRole = await _roleManager.FindByIdAsync(roleUpdateDto.Id.ToString());
-                var updatedRole = _mapper.Map<RoleUpdateDto, Role>(roleUpdateDto, oldRole);
-                var result = await _roleManager.UpdateAsync(updatedRole);
-                if (result.Succeeded)
-                {
+                RoleAssignViewModel m = new RoleAssignViewModel();
+                m.RoleID = item.Id;
+                m.Name = item.Name;
+                m.Exists = userRoles.Contains(item.Name);
+                model.Add(m);
+            }
+            
+            
+            
+            return View(model);
+        }
+        [HttpPost]
 
-                    var roleUpdateViewModel = JsonSerializer.Serialize(new RoleUpdateAjaxViewModel
-                    {
-                        RoleDto = new RoleDto
-                        {
-                            ResultStatus = ResultStatus.Success,
-                            Message = $"{updatedRole.Name} adlı rol başarıyla güncellenmiştir.",
-                            Role = updatedRole
-                        },
-                        RoleUpdatePartial = await this.RenderViewToStringAsync("_RoleUpdatePartial", roleUpdateDto)
-                    });
-                    return Json(roleUpdateViewModel);
+        public async Task<IActionResult> AssignRole(List<RoleAssignViewModel> model)
+        {
+            var userId = (int) TempData["UserId"];
+            var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+            foreach(var item in model)
+            {
+                if (item.Exists)
+                {
+                    await _userManager.AddToRoleAsync(user, item.Name);
                 }
                 else
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                    var roleUpdateErorViewModel = JsonSerializer.Serialize(new RoleUpdateAjaxViewModel
-                    {
-                        RoleUpdateDto = roleUpdateDto,
-                        RoleUpdatePartial = await this.RenderViewToStringAsync("_RoleUpdatePartial", roleUpdateDto)
-                    });
-                    return Json(roleUpdateErorViewModel);
+                    await _userManager.RemoveFromRoleAsync(user, item.Name);
                 }
-
             }
-            else
-            {
-                var roleUpdateModelStateErrorViewModel = JsonSerializer.Serialize(new RoleUpdateAjaxViewModel
-                {
-                    RoleUpdateDto = roleUpdateDto,
-                    RoleUpdatePartial = await this.RenderViewToStringAsync("_RoleUpdatePartial", roleUpdateDto)
-                });
-                return Json(roleUpdateModelStateErrorViewModel);
-            }
+            return RedirectToAction("UserRoleList");
         }
-
-
-
 
     }
 }

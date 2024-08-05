@@ -1,21 +1,17 @@
 ﻿@using ProgrammersBlog.Shared.Utilities.Results.ComplexTypes
-@model ProgrammersBlog.Entities.Dtos.RoleListDto
+@using ProgrammersBlog.Entities.Concrete
+@model List<Role>
 @{
     Layout = "_Layout";
     ViewBag.Title = "Roller Index";
 }
-@if (Model.ResultStatus == ResultStatus.Success)
-{
+
     <div id="modalPlaceHolder" aria-hidden="true"></div>
     <div class="card mb-4 mt-2">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
             Roller
         </div>
-        <div class="card-body">
-            <div class="spinner-border" role="status" style="display: none;">
-                <span class="sr-only">Yükleniyor...</span>
-            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="rolesTable" width="100%" cellspacing="0">
                     <thead>
@@ -23,6 +19,8 @@
                             <th>ID</th>
                             <th>Kullanıcı Adı</th>
                             <th>İşlemler</th>
+                            <th>İşlemler2</th>
+                                                       
                         </tr>
                     </thead>
                     <tfoot>
@@ -30,34 +28,28 @@
                             <th>ID</th>
                             <th>Kullanıcı Adı</th>
                             <th>İşlemler</th>
+                            <th>İşlemler2</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var role in Model.Roles)
+                        @foreach (var role in Model)
                         {
                             <tr name="@role.Id">
                                 <td>@role.Id</td>
                                 <td>@role.Name</td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm btn-update" data-id="@role.Id"><span class="fas fa-edit"></span></button>
-                                    <button class="btn btn-danger btn-sm btn-delete" data-id="@role.Id"><span class="fas fa-minus-circle"></span></button>
+                                    <button href="/Admin/Role/UpdateRole/" class="btn btn-outline-success" ><span class="fas fa-edit"></span></button>
+                                </td>
+                                <td>
+                                    <button href="/Admin/Role/DeleteRole/" class="btn btn-danger btn-sm btn-delete" ><span class="fas fa-minus-circle"></span></button>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
+                <a href="/Admin/Role/AddRole/" class="btn btn-outline-primary"> Yeni Rol Ekle</a>
+                <a href="/Admin/Role/UserRoleList/" class="btn btn-outline-info"> Kullanıcı rol listesi</a>
             </div>
         </div>
-    </div>
-}
-@if (Model.ResultStatus == ResultStatus.Error)
-{
-    <div class="alert alert-danger mt-3">
-        @Model.Message <br />
-        Dashboard sayfasına geri dönmek için lütfen <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">tıklayınız.</a>
-    </div>
-}
-@section Scripts
-{
-   <script src="~/js/roleIndex.js" type="application/ecmascript"></script>
-}
+
+

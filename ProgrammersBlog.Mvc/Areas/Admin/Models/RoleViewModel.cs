@@ -1,9 +1,10 @@
-﻿using ProgrammersBlog.Entities.Concrete;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProgrammersBlog.Mvc.Areas.Admin.Models
+namespace MyProject.WebUi.Areas.Admin.Models
 {
     public class RoleViewModel
     {
-        public Role Role { get; set; }
+        [Required(ErrorMessage ="Lütfen rol adı giriniz.")]
+        public string Name { get; set; }
     }
 }
