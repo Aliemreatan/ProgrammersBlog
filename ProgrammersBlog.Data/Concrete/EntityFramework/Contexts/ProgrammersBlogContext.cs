@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MyProject.Entities.Concrete;
 using ProgrammersBlog.Data.Concrete.EntityFramework.Mappings;
 using ProgrammersBlog.Entities.Concrete;
 
@@ -14,6 +15,8 @@ namespace ProgrammersBlog.Data.Concrete.EntityFramework.Contexts
     {
         public DbSet<Article> Articles { get; set; }
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Event> Events { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Comment> Comments { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

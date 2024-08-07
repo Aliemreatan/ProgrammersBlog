@@ -13,8 +13,11 @@ namespace ProgrammersBlog.Data.Concrete
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ProgrammersBlogContext _context;
+
+
         private EfArticleRepository _articleRepository;
         private EfCategoryRepository _categoryRepository;
+        private EfEventRepository _eventRepository;
         private EfGroupRepository _groupRepository;
         private EfCommentRepository _commentRepository;
 
@@ -25,6 +28,7 @@ namespace ProgrammersBlog.Data.Concrete
             _context = context;
         }
 
+        public IEventRepository Events => _eventRepository ?? new EfEventRepository(_context);
         public IArticleRepository Articles => _articleRepository ?? new EfArticleRepository(_context);
         public ICategoryRepository Categories => _categoryRepository ?? new EfCategoryRepository(_context);
 

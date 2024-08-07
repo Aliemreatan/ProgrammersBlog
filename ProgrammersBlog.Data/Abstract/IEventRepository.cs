@@ -1,4 +1,4 @@
-﻿using ProgrammersBlog.Entities.Concrete;
+﻿using MyProject.Entities.Concrete;
 using ProgrammersBlog.Entities.Concrete;
 using ProgrammersBlog.Shared.Data.Abstract;
 using ProgrammersBlog.Shared.Entities.Abstract;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProgrammersBlog.Data.Abstract
 {
-    public interface ICategoryRepository : IEntityRepository<Category>
+    public interface IEventRepository : IEntityRepository<Event>
     {
     }
 }

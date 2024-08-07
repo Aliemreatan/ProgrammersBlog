@@ -11,6 +11,8 @@ namespace ProgrammersBlog.Data.Abstract
         IArticleRepository Articles { get; } // unitofwork.Articles
         ICategoryRepository Categories { get; }
 
+        IEventRepository Events { get; }
+
         IGroupRepository Groups { get; }
         ICommentRepository Comments { get; }
         

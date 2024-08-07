@@ -9,8 +9,8 @@ using ProgrammersBlog.Shared.Entities.Abstract;
 
 namespace ProgrammersBlog.Entities.Dtos
 {
-    public class EventDto : DtoGetBase
+    public class EventListDto : DtoGetBase
     {
-        public Event Event { get; set; }
+        public IList<Event> Events { get; set; }
     }
 }

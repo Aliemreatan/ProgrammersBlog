@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace ProgrammersBlog.Data.Migrations
+namespace MyProject.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -47,6 +47,27 @@ namespace ProgrammersBlog.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedByName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModifiedByName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,6 +119,7 @@ namespace ProgrammersBlog.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Picture = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    EventId = table.Column<int>(type: "int", nullable: true),
                     GroupId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -117,6 +139,11 @@ namespace ProgrammersBlog.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_AspNetUsers_Groups_GroupId",
                         column: x => x.GroupId,
@@ -283,17 +310,17 @@ namespace ProgrammersBlog.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 98, "1b76bcd5-9851-4cb0-b177-14b69951c103", "Editor", "EDITOR" },
-                    { 99, "9b0b8cb2-d004-47e0-8e62-e5f96801302b", "Admin", "ADMIN" }
+                    { 98, "a06caa5c-08fc-49f6-b2ad-147ec23b0765", "Editor", "EDITOR" },
+                    { 99, "78efb8ce-021e-4ef1-8d34-76b8c9c72f90", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "GroupId", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Picture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "EventId", "GroupId", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Picture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 98, 0, "45341cbe-7186-431e-98ff-e82902aecc59", "editoruser@gmail.com", true, null, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAIAAYagAAAAEG8den2o+x1vF7UokYwZcbSE3jMh4QAkhmh8Qa4IOQnL+jrb2WR5whj8tHMvulFV2w==", "+905336323010", true, "defaultUser.png", "32d5913d-0adc-4ec0-a419-fd8c17edea0f", false, "editoruser" },
-                    { 99, 0, "292276bb-e18c-495f-9fbb-3866c8d475bd", "adminuser@gmail.com", true, null, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAIAAYagAAAAEChMsiJfeO5VbpGNTUnlHOqsJfPjOHDly1yIfJ0gQubtpuRN7prNQopmUD9UpjWY7w==", "+905336323010", true, "defaultUser.png", "961e39be-0143-4ec8-90d3-4e59c9f90229", false, "adminuser" }
+                    { 98, 0, "163d26ac-b8a9-4f69-abef-d124dfffa75e", "editoruser@gmail.com", true, null, null, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAIAAYagAAAAEPJ5aJ17DZNsBoATjY6yhD72++FK7KWwokTco/bgs1MoOTQADrJuFbhOZ6/y2gw6DQ==", "+905336323010", true, "defaultUser.png", "9b60eaf2-51ac-44be-9db3-2686384a2d94", false, "editoruser" },
+                    { 99, 0, "a337e364-8701-4f94-97fc-e7f528160a95", "adminuser@gmail.com", true, null, null, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAIAAYagAAAAEEGO9aC3LaCOaK1IYzxjHRoUYzktP+uyzJQiZeMCs5T82BEs5jeADzgobQ5NCkR/gg==", "+905336323010", true, "defaultUser.png", "64495ffb-e541-4b26-b2ab-02df0b96d28e", false, "adminuser" }
                 });
 
             migrationBuilder.InsertData(
@@ -301,9 +328,9 @@ namespace ProgrammersBlog.Data.Migrations
                 columns: new[] { "Id", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Name", "Note" },
                 values: new object[,]
                 {
-                    { 1, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8741), "C# Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8744), "C#", "C# Blog Kategorisi" },
-                    { 2, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8748), "C++ Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8748), "C++", "C++ Blog Kategorisi" },
-                    { 3, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8751), "JavaScript Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(8752), "JavaScript", "JavaScript Blog Kategorisi" }
+                    { 1, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(5836), "C# Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(5837), "C#", "C# Blog Kategorisi" },
+                    { 2, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(5839), "C++ Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(5840), "C++", "C++ Blog Kategorisi" },
+                    { 3, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(5842), "JavaScript Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(5843), "JavaScript", "JavaScript Blog Kategorisi" }
                 });
 
             migrationBuilder.InsertData(
@@ -311,9 +338,9 @@ namespace ProgrammersBlog.Data.Migrations
                 columns: new[] { "Id", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Name", "Note" },
                 values: new object[,]
                 {
-                    { 1, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9810), "C# Programlama Dili Grubu", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9811), "C# Grubu", "C# Blog Grubu" },
-                    { 2, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9815), "C++ Programlama Dili Grubu ", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9816), "C++ Grubu", "C++ Blog Grubu" },
-                    { 3, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9818), "JavaScript Programlama Dili Grubu", true, false, "InitialCreate", new DateTime(2024, 7, 30, 16, 32, 47, 346, DateTimeKind.Local).AddTicks(9819), "JavaScript Grubu", "JavaScript Blog Grubu" }
+                    { 1, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(6845), "C# Programlama Dili Grubu", true, false, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(6846), "C# Grubu", "C# Blog Grubu" },
+                    { 2, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(6848), "C++ Programlama Dili Grubu ", true, false, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(6849), "C++ Grubu", "C++ Blog Grubu" },
+                    { 3, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(6851), "JavaScript Programlama Dili Grubu", true, false, "InitialCreate", new DateTime(2024, 8, 7, 11, 31, 19, 199, DateTimeKind.Local).AddTicks(6852), "JavaScript Grubu", "JavaScript Blog Grubu" }
                 });
 
             migrationBuilder.InsertData(
@@ -368,6 +395,11 @@ namespace ProgrammersBlog.Data.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_EventId",
+                table: "AspNetUsers",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_GroupId",
                 table: "AspNetUsers",
                 column: "GroupId");
@@ -417,6 +449,9 @@ namespace ProgrammersBlog.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "Groups");

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MyProject.Entities.Concrete;
 using ProgrammersBlog.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace ProgrammersBlog.Data.Concrete.EntityFramework.Mappings
 {
-     public class CategoryMap : IEntityTypeConfiguration<Category>
+     public class EventMap : IEntityTypeConfiguration<Event>
     {
-        public void Configure(EntityTypeBuilder<Category> builder)
+        public void Configure(EntityTypeBuilder<Event> builder)
         {
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Id).ValueGeneratedOnAdd();
@@ -28,9 +28,9 @@ namespace ProgrammersBlog.Data.Concrete.EntityFramework.Mappings
             builder.Property(c => c.IsActive).IsRequired();
             builder.Property(c => c.IsDeleted).IsRequired();
             builder.Property(c => c.Note).HasMaxLength(500);
-            builder.ToTable("Categories");
+            builder.ToTable("Events");
             builder.HasData(
-                new Category
+                new Event
                 {
                     Id = 1,
                     Name = "C#",
@@ -45,7 +45,7 @@ namespace ProgrammersBlog.Data.Concrete.EntityFramework.Mappings
 
                 },
 
-                new Category
+                new Event
                 {
                     Id = 2,
                     Name = "C++",
@@ -59,7 +59,7 @@ namespace ProgrammersBlog.Data.Concrete.EntityFramework.Mappings
                     Note = "C++ Blog Kategorisi"
                 },
 
-                new Category
+                new Event
                 {
                     Id = 3,
                     Name = "JavaScript",
