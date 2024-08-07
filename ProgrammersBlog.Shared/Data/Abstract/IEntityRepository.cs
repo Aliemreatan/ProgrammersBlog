@@ -12,7 +12,7 @@ namespace ProgrammersBlog.Shared.Data.Abstract
     {
         Task<T> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties); // var kullanici = repository.GetAsync(k=>k.Id==15);
 
-        Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null,
+        Task<IList<T>> GetAllAsync(Expression<Func<T, bool>>? predicate = null,
             params Expression<Func<T, object>>[] includeProperties);
 
         Task<T> AddAsync(T entity);
