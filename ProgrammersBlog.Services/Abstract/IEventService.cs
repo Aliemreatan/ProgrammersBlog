@@ -13,7 +13,7 @@ namespace ProgrammersBlog.Services.Abstract
     {
         Task<IDataResult<EventDto>> Get(int eventId);
 
-        Task<IDataResult<EventUpdateDto>> GetCategoryUpdateDto(int eventId);
+        Task<IDataResult<EventUpdateDto>> GetEventUpdateDto(int eventId);
         Task<IDataResult<EventListDto>> GetAll();
         Task<IDataResult<EventListDto>> GetAllByNonDeleted();
         Task<IDataResult<EventListDto>> GetAllByNonDeletedAndActive();

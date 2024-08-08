@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammersBlog.Data.Concrete.EntityFramework.Contexts;
 
@@ -11,9 +12,11 @@ using ProgrammersBlog.Data.Concrete.EntityFramework.Contexts;
 namespace MyProject.DataAccess.Migrations
 {
     [DbContext(typeof(ProgrammersBlogContext))]
-    partial class ProgrammersBlogContextModelSnapshot : ModelSnapshot
+    [Migration("20240808155124_EventsInitialCreate")]
+    partial class EventsInitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

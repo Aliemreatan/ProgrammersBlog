@@ -13,10 +13,12 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.ViewComponents
     public class AdminMenuViewComponent : ViewComponent
     {
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
 
-        public AdminMenuViewComponent(UserManager<User> userManager)
+        public AdminMenuViewComponent(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public ViewViewComponentResult Invoke()

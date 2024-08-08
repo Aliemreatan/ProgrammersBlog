@@ -1,22 +1,23 @@
 ﻿@using ProgrammersBlog.Shared.Utilities.Results.ComplexTypes
 @model ProgrammersBlog.Entities.Dtos.EventListDto
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "_Layout";
+    ViewBag.Title = "Kategoriler Index";
 }
-
+@if (Model.ResultStatus == ResultStatus.Success)
+{
     <div id="modalPlaceHolder" aria-hidden="true"></div>
     <div class="card mb-4 mt-2">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            Etkinliker
+            Etkinlikler
         </div>
         <div class="card-body">
             <div class="spinner-border" role="status" style="display: none;">
                 <span class="sr-only">Yükleniyor...</span>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="eventsTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -48,9 +49,40 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        
+                    @foreach (var etkin in Model.Events)
+                    {
+                        <tr name="@etkin.Id">
+                            <td>@etkin.Id</td>
+                            <td>@etkin.Name</td>
+                            <td>@etkin.Description</td>
+                            <td>@etkin.IsActive</td>
+                            <td>@etkin.IsDeleted</td>
+                            <td>@etkin.Note</td>
+                            <td>@etkin.CreatedDate.ToShortDateString()</td>
+                            <td>@etkin.CreatedByName</td>
+                            <td>@etkin.ModifiedDate.ToShortDateString()</td>
+                            <td>@etkin.ModifiedByName</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm btn-update" data-id="@etkin.Id"><span class="fas fa-edit"></span></button>
+                                <button class="btn btn-danger btn-sm btn-delete" data-id="@etkin.Id"><span class="fas fa-minus-circle"></span></button>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+}
+@if (Model.ResultStatus == ResultStatus.Error)
+{
+    <div class="alert alert-danger mt-3">
+        @Model.Message <br />
+        Dashboard sayfasına geri dönmek için lütfen <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">tıklayınız.</a>
+    </div>
+}
+@section Scripts
+{
+    <script src="~/js/eventIndex.js" type="application/ecmascript"></script>
+}
+
