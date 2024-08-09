@@ -1,0 +1,15 @@
+﻿@using MyProject.WebUi.Areas.Admin.Models
+@model RoleViewModel
+@{
+    ViewData["Title"] = "AddRole";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Role Ekleme Sayfası</h1>
+<form method="post">
+    <div class="form-group">
+        <label>Rol Başlığı</label>
+        <input asp-for="@Model.Name" class="form-control" />
+    </div>
+    <button class="btn btn-info">Kaydet</button>
+</form>
