@@ -12,8 +12,8 @@ using ProgrammersBlog.Data.Concrete.EntityFramework.Contexts;
 namespace MyProject.DataAccess.Migrations
 {
     [DbContext(typeof(ProgrammersBlogContext))]
-    [Migration("20240808155124_EventsInitialCreate")]
-    partial class EventsInitialCreate
+    [Migration("20240812124401_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -156,6 +156,30 @@ namespace MyProject.DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Articles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            CommentCount = 1,
+                            Content = "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır. Beşyüz yıl boyunca varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960'larda Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur.",
+                            CreatedByName = "InitialCreate",
+                            CreatedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(1813),
+                            Date = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(1808),
+                            IsActive = true,
+                            IsDeleted = false,
+                            ModifiedByName = "InitialCreate",
+                            ModifiedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(1813),
+                            Note = "c# 9.0 ve .NET 5 Yenilikleri",
+                            SeoAuthor = "Ali Atan",
+                            SeoDescription = "c# 9.0 ve .NET 5 Yenilikleri",
+                            SeoTags = "C#, .NET5",
+                            Thumbnail = "Default.jpg",
+                            Title = "c# 9.0 ve .NET 5 Yenilikleri",
+                            UserId = 99,
+                            ViewsCount = 100
+                        });
                 });
 
             modelBuilder.Entity("ProgrammersBlog.Entities.Concrete.Category", b =>
@@ -212,12 +236,12 @@ namespace MyProject.DataAccess.Migrations
                         {
                             Id = 1,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(8867),
+                            CreatedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3166),
                             Description = "C# Programlama Dili ile ilgili bilgiler",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(8869),
+                            ModifiedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3167),
                             Name = "C#",
                             Note = "C# Blog Kategorisi"
                         },
@@ -225,12 +249,12 @@ namespace MyProject.DataAccess.Migrations
                         {
                             Id = 2,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(8873),
+                            CreatedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3170),
                             Description = "C++ Programlama Dili ile ilgili bilgiler",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(8873),
+                            ModifiedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3171),
                             Name = "C++",
                             Note = "C++ Blog Kategorisi"
                         },
@@ -238,12 +262,12 @@ namespace MyProject.DataAccess.Migrations
                         {
                             Id = 3,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(8876),
+                            CreatedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3173),
                             Description = "JavaScript Programlama Dili ile ilgili bilgiler",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(8877),
+                            ModifiedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3174),
                             Name = "JavaScript",
                             Note = "JavaScript Blog Kategorisi"
                         });
@@ -353,12 +377,12 @@ namespace MyProject.DataAccess.Migrations
                         {
                             Id = 1,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(9987),
+                            CreatedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4228),
                             Description = "C# Programlama Dili Grubu",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(9988),
+                            ModifiedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4229),
                             Name = "C# Grubu",
                             Note = "C# Blog Grubu"
                         },
@@ -366,12 +390,12 @@ namespace MyProject.DataAccess.Migrations
                         {
                             Id = 2,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(9991),
+                            CreatedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4232),
                             Description = "C++ Programlama Dili Grubu ",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(9992),
+                            ModifiedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4233),
                             Name = "C++ Grubu",
                             Note = "C++ Blog Grubu"
                         },
@@ -379,12 +403,12 @@ namespace MyProject.DataAccess.Migrations
                         {
                             Id = 3,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(9994),
+                            CreatedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4235),
                             Description = "JavaScript Programlama Dili Grubu",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 8, 18, 51, 24, 387, DateTimeKind.Local).AddTicks(9995),
+                            ModifiedDate = new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4236),
                             Name = "JavaScript Grubu",
                             Note = "JavaScript Blog Grubu"
                         });
@@ -423,14 +447,14 @@ namespace MyProject.DataAccess.Migrations
                         new
                         {
                             Id = 99,
-                            ConcurrencyStamp = "35b55b0d-b4ae-4b69-afea-b08746738c67",
+                            ConcurrencyStamp = "c456adbf-426a-43e6-aac8-79352b32c215",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 98,
-                            ConcurrencyStamp = "81b2405f-47cf-4851-8a85-58709ceffb61",
+                            ConcurrencyStamp = "adcff7f7-90e7-4767-907c-c7ab83d24f33",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         });
@@ -547,17 +571,17 @@ namespace MyProject.DataAccess.Migrations
                         {
                             Id = 99,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "16b56ae0-f494-47ca-b92a-52bd02cf8989",
+                            ConcurrencyStamp = "277f704b-3d9e-48c1-8a41-c7539d859c54",
                             Email = "adminuser@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@GMAIL.COM",
                             NormalizedUserName = "ADMINUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAENejYXAQ/pvnwI4HZrwmxWPSC8J9pkXcmRclV8Ea7AsnH3Jk2eFVNgrESJAnquzHAQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECZydrm5sZiXKpmQfpd3fUxr0GN/qjO0Q3zoo84vwuQwu+UrTdz+iQVDCfU81AUV4A==",
                             PhoneNumber = "+905336323010",
                             PhoneNumberConfirmed = true,
                             Picture = "defaultUser.png",
-                            SecurityStamp = "353f4a93-c43d-4006-a0ea-caa769b139c1",
+                            SecurityStamp = "ec9b8155-aa02-4d8e-9fba-979416a5821f",
                             TwoFactorEnabled = false,
                             UserName = "adminuser"
                         },
@@ -565,17 +589,17 @@ namespace MyProject.DataAccess.Migrations
                         {
                             Id = 98,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "839038be-b079-4695-86ec-8cf842560708",
+                            ConcurrencyStamp = "fafd775b-984a-4730-847f-ed6f8df3f016",
                             Email = "editoruser@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EDITORUSER@GMAIL.COM",
                             NormalizedUserName = "EDITORUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAENTe1/bYJ19Nht1c8nvlhZC4Ld1SUZnhl/Xs9maSu1qBqjpa02c8Neh+1gQu0wFaUg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDzOj2N8f1mjXPmwvQ27+dG8komXB0MC6GDACbqz7FKRrB0zV/wi+9xjInYCA9yQQA==",
                             PhoneNumber = "+905336323010",
                             PhoneNumberConfirmed = true,
                             Picture = "defaultUser.png",
-                            SecurityStamp = "20272608-36c1-4c27-b2ef-45fe9f654aa7",
+                            SecurityStamp = "9c77f370-97cc-4ac4-b769-4478d21da57e",
                             TwoFactorEnabled = false,
                             UserName = "editoruser"
                         });
