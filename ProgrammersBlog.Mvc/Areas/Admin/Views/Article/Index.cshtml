@@ -22,7 +22,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Adı</th>
-                            <th>Açıklaması</th>
+                            <th>Başlık</th>
                             <th>Aktif Mi?</th>
                             <th>Silinmiş Mi?</th>
                             <th>Not</th>
@@ -37,7 +37,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Adı</th>
-                            <th>Açıklaması</th>
+                            <th>Başlık</th>
                             <th>Aktif Mi?</th>
                             <th>Silinmiş Mi?</th>
                             <th>Not</th>
@@ -81,4 +81,8 @@
         @Model.Message <br />
         Dashboard sayfasına geri dönmek için lütfen <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">tıklayınız.</a>
     </div>
+}
+@section Scripts
+{
+    <script src="~/js/articleIndex.js" type="application/ecmascript"></script>
 }

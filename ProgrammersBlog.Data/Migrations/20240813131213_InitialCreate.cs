@@ -310,8 +310,8 @@ namespace MyProject.DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 98, "adcff7f7-90e7-4767-907c-c7ab83d24f33", "Editor", "EDITOR" },
-                    { 99, "c456adbf-426a-43e6-aac8-79352b32c215", "Admin", "ADMIN" }
+                    { 98, "c1d55d3f-57ad-4ac8-974c-a24d8ba842da", "Editor", "EDITOR" },
+                    { 99, "8056d64b-5a82-40fa-9efe-82b616c401a3", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -319,8 +319,8 @@ namespace MyProject.DataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "EventId", "GroupId", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Picture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 98, 0, "fafd775b-984a-4730-847f-ed6f8df3f016", "editoruser@gmail.com", true, null, null, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAIAAYagAAAAEDzOj2N8f1mjXPmwvQ27+dG8komXB0MC6GDACbqz7FKRrB0zV/wi+9xjInYCA9yQQA==", "+905336323010", true, "defaultUser.png", "9c77f370-97cc-4ac4-b769-4478d21da57e", false, "editoruser" },
-                    { 99, 0, "277f704b-3d9e-48c1-8a41-c7539d859c54", "adminuser@gmail.com", true, null, null, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAIAAYagAAAAECZydrm5sZiXKpmQfpd3fUxr0GN/qjO0Q3zoo84vwuQwu+UrTdz+iQVDCfU81AUV4A==", "+905336323010", true, "defaultUser.png", "ec9b8155-aa02-4d8e-9fba-979416a5821f", false, "adminuser" }
+                    { 98, 0, "ec8448c5-4755-42e5-8bfa-b7092df9de47", "editoruser@gmail.com", true, null, null, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAIAAYagAAAAEG8BCPRznrkuxlsVv3U7exdIiQrPw1ze5JlG1o0QPKndpXNF0a1/zLWWTPWuKe7EFA==", "+905336323010", true, "defaultUser.png", "e3edd7aa-668e-4dbc-8351-91b95a4a5656", false, "editoruser" },
+                    { 99, 0, "ba523a2b-3764-413f-9e6a-e13b40ef300a", "adminuser@gmail.com", true, null, null, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAIAAYagAAAAEJoQzbeK5Wv6ZgTdiiWuaPKutlN9ArrYkg0nlLswtoqZRUi5e0xKebfCVxAilvPmYQ==", "+905336323010", true, "defaultUser.png", "106700b4-bb0a-4560-b3c1-3dad8c36f052", false, "adminuser" }
                 });
 
             migrationBuilder.InsertData(
@@ -328,9 +328,9 @@ namespace MyProject.DataAccess.Migrations
                 columns: new[] { "Id", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Name", "Note" },
                 values: new object[,]
                 {
-                    { 1, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3166), "C# Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3167), "C#", "C# Blog Kategorisi" },
-                    { 2, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3170), "C++ Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3171), "C++", "C++ Blog Kategorisi" },
-                    { 3, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3173), "JavaScript Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(3174), "JavaScript", "JavaScript Blog Kategorisi" }
+                    { 1, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(6383), "C# Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(6383), "C#", "C# Blog Kategorisi" },
+                    { 2, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(6386), "C++ Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(6387), "C++", "C++ Blog Kategorisi" },
+                    { 3, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(6395), "JavaScript Programlama Dili ile ilgili bilgiler", true, false, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(6396), "JavaScript", "JavaScript Blog Kategorisi" }
                 });
 
             migrationBuilder.InsertData(
@@ -338,15 +338,15 @@ namespace MyProject.DataAccess.Migrations
                 columns: new[] { "Id", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Name", "Note" },
                 values: new object[,]
                 {
-                    { 1, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4228), "C# Programlama Dili Grubu", true, false, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4229), "C# Grubu", "C# Blog Grubu" },
-                    { 2, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4232), "C++ Programlama Dili Grubu ", true, false, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4233), "C++ Grubu", "C++ Blog Grubu" },
-                    { 3, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4235), "JavaScript Programlama Dili Grubu", true, false, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(4236), "JavaScript Grubu", "JavaScript Blog Grubu" }
+                    { 1, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(7238), "C# Programlama Dili Grubu", true, false, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(7239), "C# Grubu", "C# Blog Grubu" },
+                    { 2, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(7241), "C++ Programlama Dili Grubu ", true, false, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(7242), "C++ Grubu", "C++ Blog Grubu" },
+                    { 3, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(7244), "JavaScript Programlama Dili Grubu", true, false, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(7244), "JavaScript Grubu", "JavaScript Blog Grubu" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Articles",
                 columns: new[] { "Id", "CategoryId", "CommentCount", "Content", "CreatedByName", "CreatedDate", "Date", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Note", "SeoAuthor", "SeoDescription", "SeoTags", "Thumbnail", "Title", "UserId", "ViewsCount" },
-                values: new object[] { 1, 1, 1, "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır. Beşyüz yıl boyunca varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960'larda Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur.", "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(1813), new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(1808), true, false, "InitialCreate", new DateTime(2024, 8, 12, 15, 44, 0, 791, DateTimeKind.Local).AddTicks(1813), "c# 9.0 ve .NET 5 Yenilikleri", "Ali Atan", "c# 9.0 ve .NET 5 Yenilikleri", "C#, .NET5", "Default.jpg", "c# 9.0 ve .NET 5 Yenilikleri", 99, 100 });
+                values: new object[] { 1, 1, 1, "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır. Beşyüz yıl boyunca varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960'larda Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur.", "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(5294), new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(5290), true, false, "InitialCreate", new DateTime(2024, 8, 13, 16, 12, 13, 40, DateTimeKind.Local).AddTicks(5295), "c# 9.0 ve .NET 5 Yenilikleri", "Ali Atan", "c# 9.0 ve .NET 5 Yenilikleri", "C#, .NET5", "Default.jpg", "c# 9.0 ve .NET 5 Yenilikleri", 99, 100 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

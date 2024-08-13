@@ -40,7 +40,7 @@ namespace ProgrammersBlog.Mvc
         public void ConfigureServices(IServiceCollection services)
         {
             // Kullancaðýmýz servisin sisteme tanýtýlmasý
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile), typeof(GroupProfile), typeof(ArticleProfile), typeof(UserProfile), typeof(RoleProfile), typeof(EventProfile));
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile), typeof(GroupProfile), typeof(ArticleProfile), typeof(UserProfile), typeof(RoleProfile));
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());

@@ -21,5 +21,6 @@ namespace ProgrammersBlog.Services.Abstract
         Task<IDataResult<ArticleDto>> Update(ArticleUpdateDto articleUpdateDto, string modifiedByName);
         Task<IDataResult<ArticleDto>> Delete(int articleId, string modifiedByName);
         Task<IResult> HardDelete(int articleId);
+
     }
 }

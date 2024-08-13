@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\articleIndex.js" />
     <Content Remove="wwwroot\js\categoryIndex.js" />
     <Content Remove="wwwroot\js\eventIndex.js" />
     <Content Remove="wwwroot\js\groupIndex.js" />
@@ -31,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\articleIndex.js" />
     <None Include="wwwroot\js\eventIndex.js" />
     <None Include="wwwroot\js\groupIndex.js" />
     <None Include="wwwroot\js\roleIndex.js" />

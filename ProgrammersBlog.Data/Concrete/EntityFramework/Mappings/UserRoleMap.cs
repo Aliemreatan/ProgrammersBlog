@@ -24,6 +24,7 @@ namespace ProgrammersBlog.Data.Concrete.EntityFramework.Mappings
                 {
                     RoleId = 99,
                     UserId = 99,
+                    
                 },
                     new UserRole
                     {
